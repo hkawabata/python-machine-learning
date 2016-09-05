@@ -4,8 +4,9 @@ from numpy import random
 
 eta = 0.5
 
+
 def generate_random_weight(num_elem):
-    return random.rand(num_elem)
+    return map(lambda r: r - 0.5, random.rand(num_elem))
 
 
 def insert_dummy_elem(x):
@@ -50,8 +51,8 @@ if __name__ == '__main__':
             z = 0
             for i in range(len(xs[0])):
                 z += xs[j][i] * w[i]
-            dw = eta * (labels[j] - phi(z)) * xs[j][i]
-            w[i] += dw
+                dw = eta * (labels[j] - phi(z)) * xs[j][i]
+                w[i] += dw
 
     # 学習データをラベリングできているか確認
     print "result label"
