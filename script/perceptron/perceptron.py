@@ -40,11 +40,6 @@ def execute(training_data, training_labels):
                 z += xij * wj
             update = eta * (labeli - activation_func(z)) #* training_data_with_dummy[j][i]
 
-            """
-            w[0] += update
-            for j in range(1, len(w)):
-                w[j] += update * xi[j]
-            """
             for j in range(len(w)):
                 w[j] += update * xi[j]
             if update != 0:
