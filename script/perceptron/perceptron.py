@@ -7,8 +7,10 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../data_set_generator')
 import data_set_generator
 
-eta = 0.5
 
+eta = 0.1
+
+errors = []
 
 def generate_random_weight(num_elem):
     return map(lambda r: r - 0.5, random.rand(num_elem))
@@ -26,26 +28,40 @@ def activation_func(z):
 
 
 def execute(training_data, training_labels):
-    # 破壊的。改善の余地あり
     training_data_with_dummy = insert_dummy_elem(training_data)
     w = generate_random_weight(len(training_data_with_dummy[0]))
 
-    for time in range(10):
-        for j in range(len(training_data_with_dummy)):
+    for _ in range(10):
+        cnt_err = 0
+        cnt_correct = 0
+        for xi, labeli in zip(training_data_with_dummy, training_labels):
             z = 0
-            for i in range(len(training_data_with_dummy[0])):
-                z += training_data_with_dummy[j][i] * w[i]
-                dw = eta * (training_labels[j] - activation_func(z)) * training_data_with_dummy[j][i]
-                w[i] += dw
+            for xij, wj in zip(xi, w):
+                z += xij * wj
+            update = eta * (labeli - activation_func(z)) #* training_data_with_dummy[j][i]
+
+            """
+            w[0] += update
+            for j in range(1, len(w)):
+                w[j] += update * xi[j]
+            """
+            for j in range(len(w)):
+                w[j] += update * xi[j]
+            if update != 0:
+                cnt_err += 1
+            else:
+                cnt_correct += 1
+        print cnt_err, cnt_correct, w
     return w
 
 
 def calculate_labels(test_data, w):
+    test_data_with_dummy = insert_dummy_elem(test_data)
     labels = []
-    for j in range(len(test_data)):
+    for j in range(len(test_data_with_dummy)):
         z = 0
-        for i in range(len(test_data[0])):
-            z += test_data[j][i] * w[i]
+        for i in range(len(test_data_with_dummy[0])):
+            z += test_data_with_dummy[j][i] * w[i]
         labels.append(activation_func(z))
     return labels
 
@@ -77,13 +93,12 @@ def test():
     w = execute(training_data, training_labels)
 
     labels = calculate_labels(test_data, w)
-    print labels
 
     print_result(test_data, labels)
 
 
 def test2():
-    data_set = data_set_generator.generate_two_circle_data_set(500)
+    data_set = data_set_generator.generate_two_circle_data_set(500, x1=1, y1=2, r1=1, x2=-1, y2=3, r2=1)
     data = [x[0] for x in data_set]
     labels = [x[1] for x in data_set]
 
@@ -97,9 +112,10 @@ def test2():
     result_labels = calculate_labels(test_data, w)
 
     print_result(test_data, result_labels)
+    #print_result(test_data, test_labels)
 
 if __name__ == '__main__':
-
+    test()
     test2()
 
 
