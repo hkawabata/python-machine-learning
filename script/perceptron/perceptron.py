@@ -38,7 +38,7 @@ def execute(training_data, training_labels):
             z = 0
             for xij, wj in zip(xi, w):
                 z += xij * wj
-            update = eta * (labeli - activation_func(z)) #* training_data_with_dummy[j][i]
+            update = eta * (labeli - activation_func(z))
 
             for j in range(len(w)):
                 w[j] += update * xi[j]
@@ -107,7 +107,6 @@ def test2():
     result_labels = calculate_labels(test_data, w)
 
     print_result(test_data, result_labels)
-    #print_result(test_data, test_labels)
 
 if __name__ == '__main__':
     test()
