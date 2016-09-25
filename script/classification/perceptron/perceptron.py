@@ -34,7 +34,7 @@ class Perceptron(Classification):
         for time in range(self.n_iter):
             cnt_err = 0
             for xi, labeli in zip(training_data_with_dummy, training_labels):
-                update = self.eta * (labeli - self.calculate_label(xi))
+                update = self.eta * (labeli - self.predict_label(xi))
 
                 for j in range(len(self.w_)):
                     self.w_[j] += update * xi[j]

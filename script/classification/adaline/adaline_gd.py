@@ -33,7 +33,7 @@ class AdalineGD(Classification):
         for time in range(self.n_iter):
             label_diff = []
             for xi, correct_label in zip(training_data_with_dummy, training_labels):
-                label_diff.append(correct_label - self.calculate_label(xi))
+                label_diff.append(correct_label - self.predict_label(xi))
             cnt_err = len([diff for diff in label_diff if diff != 0])
             self.errors_.append(cnt_err)
             if cnt_err == 0:

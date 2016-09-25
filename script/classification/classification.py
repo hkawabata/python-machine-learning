@@ -31,15 +31,15 @@ class Classification:
         else:
             return -1
 
-    def calculate_labels(self, data):
+    def predict_labels(self, data):
         data_with_dummy = self.insert_dummy_elem(data)
         labels = []
         for data in data_with_dummy:
-            label = self.calculate_label(data)
+            label = self.predict_label(data)
             labels.append(label)
         return labels
 
-    def calculate_label(self, data_i):
+    def predict_label(self, data_i):
         z = 0
         for j in range(len(data_i)):
             z += data_i[j] * self.w_[j]
@@ -50,6 +50,8 @@ class Classification:
         distinct_labels = list(set(labels))
         data_and_labels = zip(data, labels)
         colors = ["red", "blue", "green", "orange", "navy", "purple", "yellow", "violet", "tomato", "cyan", "pink"]
+
+        # 分類結果
         plt.subplot(1, 2, 1)
         plt.title("result of classification")
         for label, color in zip(distinct_labels, colors):
@@ -60,6 +62,7 @@ class Classification:
         plt.ylabel('y')
         plt.legend(loc='upper left')
 
+        # 誤分類の数の遷移
         plt.subplot(1, 2, 2)
         plt.plot(list(range(1, len(self.errors_) + 1)), self.errors_, marker='o')
         plt.xlabel('epochs')
@@ -103,6 +106,6 @@ class ClassificationTest:
         test_labels = labels[num_of_traning_data:]
 
         self.classification.fit(training_data, training_labels)
-        result_labels = self.classification.calculate_labels(test_data)
+        result_labels = self.classification.predict_labels(test_data)
 
         self.classification.print_result(test_data, result_labels)
