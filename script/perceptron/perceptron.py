@@ -5,10 +5,12 @@ import matplotlib.pyplot as plt
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../data_set_generator')
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../classification')
 import data_set_generator
+from classification import Classification
 
 
-class Perceptron:
+class Perceptron(Classification):
     """パーセプトロンの分類器
 
     パラメータ
@@ -25,10 +27,7 @@ class Perceptron:
     """
 
     def __init__(self, eta, n_iter):
-        self.eta = eta
-        self.n_iter = n_iter
-        self.errors_ = []
-        self.w_ = []
+        Classification.__init__(self, eta, n_iter)
 
     @staticmethod
     def generate_random_weight(num_elem):
