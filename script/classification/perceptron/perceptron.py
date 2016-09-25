@@ -4,10 +4,10 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../data_set_generator')
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
-from classification import Classification, ClassificationTest
+from classifier import Classifier, ClassifierTest
 
 
-class Perceptron(Classification):
+class Perceptron(Classifier):
     """パーセプトロンの分類器
 
     パラメータ
@@ -24,7 +24,7 @@ class Perceptron(Classification):
     """
 
     def __init__(self, eta, n_iter):
-        Classification.__init__(self, eta, n_iter)
+        Classifier.__init__(self, eta, n_iter)
 
     def fit(self, training_data, training_labels):
         training_data_with_dummy = self.insert_dummy_elem(training_data)
@@ -51,7 +51,7 @@ class Perceptron(Classification):
 
 if __name__ == '__main__':
     ppn = Perceptron(eta=0.01, n_iter=100)
-    ppn_test = ClassificationTest(ppn, training_data_rate=1.0/3)
+    ppn_test = ClassifierTest(ppn, training_data_rate=1.0 / 3)
     ppn_test.test()
     ppn_test.test2()
     ppn_test.test3()

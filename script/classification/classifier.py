@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../data_set_gener
 import data_set_generator
 
 
-class Classification:
+class Classifier:
     def __init__(self, eta, n_iter):
         self.eta = eta
         self.n_iter = n_iter
@@ -72,9 +72,9 @@ class Classification:
         plt.show()
 
 
-class ClassificationTest:
-    def __init__(self, classification, training_data_rate=0.5):
-        self.classification = classification
+class ClassifierTest:
+    def __init__(self, classifier, training_data_rate=0.5):
+        self.classifier = classifier
         self.td_rate = training_data_rate
 
     def test(self):
@@ -105,7 +105,7 @@ class ClassificationTest:
         test_data = data[num_of_traning_data:]
         test_labels = labels[num_of_traning_data:]
 
-        self.classification.fit(training_data, training_labels)
-        result_labels = self.classification.predict_labels(test_data)
+        self.classifier.fit(training_data, training_labels)
+        result_labels = self.classifier.predict_labels(test_data)
 
-        self.classification.print_result(test_data, result_labels)
+        self.classifier.print_result(test_data, result_labels)

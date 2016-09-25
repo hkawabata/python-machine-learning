@@ -4,14 +4,14 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../data_set_generator')
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
-from classification import Classification, ClassificationTest
+from classifier import Classifier, ClassifierTest
 import numpy as np
 
 
-class AdalineGD(Classification):
+class AdalineGD(Classifier):
 
     def __init__(self, eta, n_iter):
-        Classification.__init__(self, eta, n_iter)
+        Classifier.__init__(self, eta, n_iter)
 
     @staticmethod
     def standardize(x):
@@ -45,7 +45,7 @@ class AdalineGD(Classification):
 
 if __name__ == '__main__':
     adaline_gd = AdalineGD(0.001, 1000)
-    adaline_gd_test = ClassificationTest(adaline_gd, training_data_rate=1.0/3)
+    adaline_gd_test = ClassifierTest(adaline_gd, training_data_rate=1.0 / 3)
     adaline_gd_test.test()
     adaline_gd_test.test2()
     adaline_gd_test.test3()
