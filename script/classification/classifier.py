@@ -11,6 +11,21 @@ import data_set_generator
 
 
 class Classifier:
+    """2値分類器
+
+    パラメータ
+    ----------
+    eta : float
+        学習率 (0, 1.0]
+    n_iter : int
+        トレーニングの最大反復回数
+
+    属性
+    ----------
+    w_ : 適合後の重み
+    errors_ : 各エポックでの誤分類の数
+    """
+
     def __init__(self, eta, n_iter):
         self.eta = eta
         self.n_iter = n_iter

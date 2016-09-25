@@ -8,20 +8,7 @@ from classifier import Classifier, ClassifierTest
 
 
 class Perceptron(Classifier):
-    """パーセプトロンの分類器
-
-    パラメータ
-    ----------
-    eta : float
-        学習率 (0, 1.0]
-    n_iter : int
-        トレーニングの最大反復回数
-
-    属性
-    ----------
-    w_ : 適合後の重み
-    errors_ : 各エポックでの誤分類の数
-    """
+    """パーセプトロンの分類器"""
 
     def __init__(self, eta, n_iter):
         Classifier.__init__(self, eta, n_iter)

@@ -9,6 +9,7 @@ import numpy as np
 
 
 class AdalineGD(Classifier):
+    """ADALINE 勾配降下法による分類器"""
 
     def __init__(self, eta, n_iter):
         Classifier.__init__(self, eta, n_iter)
