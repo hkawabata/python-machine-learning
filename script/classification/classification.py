@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from numpy import random
+import numpy as np
 import matplotlib.pyplot as plt
 
 import sys
@@ -18,11 +18,11 @@ class Classification:
 
     @staticmethod
     def generate_random_weight(num_elem):
-        return map(lambda r: r - 0.5, random.rand(num_elem))
+        return np.random.rand(num_elem) - 0.5
 
     @staticmethod
     def insert_dummy_elem(x):
-        return map(lambda v: [1] + v, x)
+        return np.array([[1.0] + list(xi) for xi in x])
 
     @staticmethod
     def activation_func(z):
