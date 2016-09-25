@@ -34,8 +34,8 @@ class Classification:
     def calculate_labels(self, data):
         data_with_dummy = self.insert_dummy_elem(data)
         labels = []
-        for j in range(len(data_with_dummy)):
-            label = self.calculate_label(data_with_dummy[j])
+        for data in data_with_dummy:
+            label = self.calculate_label(data)
             labels.append(label)
         return labels
 
