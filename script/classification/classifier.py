@@ -34,20 +34,24 @@ class Classifier:
 
     @staticmethod
     def generate_random_weight(num_elem):
+        """指定された長さの重みベクトル初期値をランダムに作成する（-0.5〜0.5）"""
         return np.random.rand(num_elem) - 0.5
 
     @staticmethod
     def insert_dummy_elem(x):
+        """ベクトルそれぞれの先頭に要素 1.0 を追加する"""
         return np.array([[1.0] + list(xi) for xi in x])
 
     @staticmethod
     def activation_func(z):
+        """活性化関数"""
         if z > 0:
             return 1
         else:
             return -1
 
     def predict_labels(self, data):
+        """重みと各データの内積を取り、データのラベルを判定する"""
         data_with_dummy = self.insert_dummy_elem(data)
         labels = []
         for data in data_with_dummy:
@@ -56,13 +60,14 @@ class Classifier:
         return np.array(labels)
 
     def predict_label(self, data_i):
+        """重みとデータ1件の内積を取り、データのラベルを判定する"""
         z = 0
         for j in range(len(data_i)):
             z += data_i[j] * self.w_[j]
         return self.activation_func(z)
 
     def print_result(self, data, resolution=0.02):
-        u"""2次元ベクトルを想定"""
+        u"""各データのラベルを判定し、結果をグラフ化して出力する"""
         # データのラベルを計算
         data_labels = self.predict_labels(data)
         # 等高線用のグリッドデータを作成し、各ブロックのラベルを計算
