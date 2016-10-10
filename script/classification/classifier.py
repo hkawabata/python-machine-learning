@@ -87,7 +87,6 @@ class Classifier:
         plt.title('result of classification')
         plt.xlabel('x')
         plt.ylabel('y')
-        plt.legend(loc='upper left')
         plt.contourf(x_grid, y_grid, grid_labels, alpha=0.4, cmap=cmap)
         for label, color in zip(unique_labels, colors):
             x = [d[0][0] for d in data_and_labels if d[1] == label]
@@ -95,6 +94,7 @@ class Classifier:
             plt.scatter(x, y, color=color, label=label)
         plt.xlim(x_min, x_max)
         plt.ylim(y_min, y_max)
+        plt.legend(loc='upper left')
 
         # 誤分類の数の遷移
         plt.subplot(1, 2, 2)
